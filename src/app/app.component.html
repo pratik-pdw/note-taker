@@ -1,20 +1,46 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<app-navbar></app-navbar>
+  
+ 
+ 
+ <div class="container sm-w-50 mx-auto">
+        <flash-messages></flash-messages>
+     <div class="jumbotron">
+           
+     <form #f="ngForm" (ngSubmit)="addNote(f)">
+         <div class="form-group">
+             <label for="notetitle" class="h3" >Note Title</label><br>
+             <input type="text" class="form-control" placeholder="Note Title" 
+             [(ngModel)]="notes.noteTitle"  name="noteTitle" #noteTitleIp="ngModel" required     autocomplete="off" >
+         </div>
+         <div *ngIf="noteTitleIp.errors?.required && noteTitleIp.touched" class="alert alert-danger"  >"Required Title"</div>
+         <div class="form-group">
+                <label for="notebody" class="h3">Note Body</label><br>
+                <input type="text" placeholder="Note Body" class="form-control" 
+                [(ngModel)]="notes.noteBody"  name="noteBody"  #noteBodyIp="ngModel"   autocomplete="off" required >
+            </div>
+            <div *ngIf="noteBodyIp.errors?.required && noteBodyIp.touched" class="alert alert-danger"  >"Required Body Text"</div>
+            <input type="submit" class="btn btn-warning btn-block" value="Submit Note" >
+     </form>
+    </div>
+ </div>
+<hr>
+ <div class="container">
+     <div *ngFor="let note of notes">
+            <div class="card" >
+                    <div class="card-header">
+                       {{ note.noteTitle }}&nbsp; 
+                       <button class="btn btn-sm btn-primary" (click)="editNote(note)" >Edit
+                            <i class="far fa-edit"></i>
+                       </button> <button class="btn btn-sm btn-danger" (click)="removeNote(note.id)" >Remove
+                            <i class="far fa-trash-alt"></i>
+                       </button>
+                    </div>
+                    <div class="card-body">
+                      {{ note.noteBody }}
+                    </div>
+                </div>
+                <br>
+     </div>    
+ </div>
+
 
