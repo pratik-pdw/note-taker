@@ -8,37 +8,45 @@
            
      <form #f="ngForm" (ngSubmit)="addNote(f); f.reset()">
          <div class="form-group">
-             <label for="notetitle" class="h3" >Note Title</label><br>
+             <label for="notetitle" class="h3 font-weight-bold" >Note Title</label><br>
              <input type="text" class="form-control" placeholder="Note Title" 
              [(ngModel)]="notes.noteTitle"  name="noteTitle" #noteTitleIp="ngModel" required     autocomplete="off" >
          </div>
          <div *ngIf="noteTitleIp.errors?.required && noteTitleIp.touched" class="alert alert-danger"  >"Required Title"</div>
          <div class="form-group">
-                <label for="notebody" class="h3">Note Body</label><br>
+                <label for="notebody" class="h3 font-weight-bold">Note Body</label><br>
                 <input type="text" placeholder="Note Body" class="form-control" 
                 [(ngModel)]="notes.noteBody"  name="noteBody"  #noteBodyIp="ngModel"   autocomplete="off" required >
             </div>
-            <div *ngIf="noteBodyIp.errors?.required && noteBodyIp.touched" class="alert alert-danger"  >"Required Body Text"</div>
-            <input type="submit" class="btn btn-warning btn-block" value="Submit Note" >
+            <div *ngIf="noteBodyIp.errors?.required && noteBodyIp.touched" class="alert alert-danger "  >"Required Body Text"</div>
+            <input type="submit" class="btn btn-warning btn-block btn-lg" value="Submit Note">
      </form>
     </div>
  </div>
 <hr>
  <div class="container">
-     <div *ngFor="let note of notes">
-            <div class="card" >
-                    <div class="card-header">
-                       {{ note.noteTitle }}&nbsp; 
-                       <button class="btn btn-sm btn-primary" (click)="editNote(note)" >Edit
-                            <i class="far fa-edit"></i>
-                       </button> <button class="btn btn-sm btn-danger" (click)="removeNote(note.id)" >Remove
-                            <i class="far fa-trash-alt"></i>
-                       </button>
-                    </div>
-                    <div class="card-body">
-                      {{ note.noteBody }}
-                    </div>
-                </div>
+     <div >
+         <div class="row">
+            <div class="col-md-6 mt-2" *ngFor="let note of notes">
+                    <div class="card" >
+                            <div class="card-header h5 font-weight-bold">
+                               {{ note.noteTitle }}&nbsp; 
+                               <div class="float-right utility-buttons">
+                                    <button class="btn btn-sm btn-primary" (click)="editNote(note)" >Edit
+                                            <i class="far fa-edit"></i>
+                                       </button> <button class="btn btn-sm btn-danger" (click)="removeNote(note.id)" >Remove
+                                            <i class="far fa-trash-alt"></i>
+                                       </button>
+                               </div>
+                               
+                            </div>
+                            <div class="card-body">
+                              {{ note.noteBody }}
+                            </div>
+                        </div>
+            </div>
+         </div>
+            
                 <br>
      </div>    
  </div>
