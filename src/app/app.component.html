@@ -6,7 +6,7 @@
         <flash-messages></flash-messages>
      <div class="jumbotron">
            
-     <form #f="ngForm" (ngSubmit)="addNote(f)">
+     <form #f="ngForm" (ngSubmit)="addNote(f); f.reset()">
          <div class="form-group">
              <label for="notetitle" class="h3" >Note Title</label><br>
              <input type="text" class="form-control" placeholder="Note Title" 
